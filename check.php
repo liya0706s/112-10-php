@@ -1,7 +1,10 @@
 <?php
 if($_POST['acc']=='admin'&& $_POST['pw']=='1234'){
-    echo "登入成功!";
+
+    header("location:member.php?success=1");
+
 }else{
-    echo "帳號密碼錯誤，請重新登入。";
+    header("location:login.php?m=帳號密碼錯誤");
+    
 }
 ?>
