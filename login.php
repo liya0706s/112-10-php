@@ -51,6 +51,9 @@
         if(isset($_GET['m'])){
             echo "<span style='color:red'>".$_GET['m']."</span>";
         }
+        if(isset($_GET['success'])&& $_GET['success']==1){
+            echo "<span style='color:pink'>"."歡迎你!"."</span>";
+        }
 
         ?>
 
