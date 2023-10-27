@@ -6,10 +6,6 @@ if (!empty($_GET)) {
 
     $bmi=round($weight/($height*$height),2);
     
-    // echo "體重:" . $weight;
-    // echo "身高:" . $height;
-    // echo "<br>";
-    // echo "BMI:". $bmi;
 
     header("location:bmi.php?w=$weight&h=$height&bmi=$bmi");
     
