@@ -16,7 +16,7 @@
         </div>
         <div>
             <label for="pw">密碼:</label>
-            <input type="password" name="pw" name="pw">
+            <input type="password" name="pw" id="pw">
         </div>
         <div>
             <input type="submit" value="送出">
