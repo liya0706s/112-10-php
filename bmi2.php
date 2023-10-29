@@ -8,6 +8,12 @@
 </head>
 
 <body>
+<?php
+if(!isset($_GET['bmi'])){
+
+
+?>
+
     <h2>計算BMI</h2>
     <form action="calc2.php" method="get">
     <div>
@@ -27,5 +33,17 @@
 
 </body>
 </form>
+
+<?php
+
+}else{
+    echo "身高:" . $_GET['h']. "公尺";
+    echo "<br>";
+    echo "體重:" . $_GET['w']. "公斤";
+    echo "<br>";
+    echo "BMI值:". $_GET['bmi'];
+}
+
+?>
 
 </html>

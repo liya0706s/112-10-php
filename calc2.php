@@ -6,15 +6,17 @@ if(!empty($_GET)){
     // 體重（公斤）除以身高（公尺）的平方 
 
     $bmi=round($weight/($height*$height),2);
-
-    echo "身高:" . $height;
-    echo "<br>";
-    echo "體重:" . $weight;
-    echo "<br>";
-    echo "BMI值:". $bmi;
+    header("location:bmi2.php?w=$weight&h=$height&bmi=$bmi");
+    
+    // echo "身高:" . $height;
+    // echo "<br>";
+    // echo "體重:" . $weight;
+    // echo "<br>";
+    // echo "BMI值:". $bmi;
 
 }else{
-    echo "請輸入正確的值";
+    header("location:bmi2.php?m=請輸入正確的值");
+    // echo "請輸入正確的值";
 }
     
 
