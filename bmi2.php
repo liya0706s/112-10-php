@@ -11,6 +11,9 @@
 <?php
 if(!isset($_GET['bmi'])){
 
+    if(isset($_GET['m'])){
+        echo "<span style=color:red>".$_GET['m']."</span>";
+    }
 
 ?>
 
