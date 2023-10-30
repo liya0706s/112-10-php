@@ -7,8 +7,7 @@
 </head>
 <body>
 <?php
-session_start();
-if(isset($_SESSION['success']) && !empty($_SESSION['success'])){
+if($_GET['success']==1){
     echo "<h3>登入成功</h3>";
     echo "<a href='login.php'>回登入頁</a>";
 }else{

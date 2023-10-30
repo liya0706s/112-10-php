@@ -48,18 +48,14 @@
 </head>
 
 <body>
-    <h1>請登入</h1>
     <div class="login-block">
-
         <?php
-        session_start();
-        if (isset($_SESSION['error'])) {
-            echo "<span style='color:red'>" . $_SESSION['error'] . "</span>";
+        if (isset($_GET['m'])) {
+            echo "<span style='color:red'>" . $_GET['m'] . "</span>";
         }
-        if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-            echo $_SESSION['success']."歡迎你!";
+        if (isset($_GET['success']) && $_GET['success']==1) {
+            echo "歡迎你!";
         }else{
-
 
         ?>
 
