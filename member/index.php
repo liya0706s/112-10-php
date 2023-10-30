@@ -1,9 +1,5 @@
 <?php
-
 include_once "session.php";
-
-echo date("Y-m-d H:i:s");
-
 ?>
 
 <!DOCTYPE html>

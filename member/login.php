@@ -1,3 +1,7 @@
+<?php
+include_once "session.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,17 +52,17 @@
 </head>
 
 <body>
-    
+<?php
+
+include_once "header.php";
+
+?>
     <div class="login-block">
         <?php
-        include_once "header.php";
         
-        session_start();
         if (isset($_SESSION['error'])) {
             echo "<span style='color:red'>" . $_SESSION['error'] . "</span>";
-            // 確認有資料，echo在client端文字
             unset($_SESSION['error']);
-            // 不設定意思是，在記憶體中刪除(最終會被刪除，曾經存在過)
         }
         if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
             echo $_SESSION['success']."歡迎你!";
