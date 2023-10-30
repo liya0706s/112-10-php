@@ -48,21 +48,19 @@
 </head>
 
 <body>
-    <h1>請登入</h1>
     <div class="login-block">
-
         <?php
         session_start();
         if (isset($_SESSION['error'])) {
             echo "<span style='color:red'>" . $_SESSION['error'] . "</span>";
+            // 確認有資料，echo在client端文字
+            unset($_SESSION['error']);
+            // 不設定意思是，在記憶體中刪除(最終會被刪除，曾經存在過)
         }
         if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
             echo $_SESSION['success']."歡迎你!";
         }else{
-
-
         ?>
-
 
         <form action="check.php" method="post">
             <div class="login-input">

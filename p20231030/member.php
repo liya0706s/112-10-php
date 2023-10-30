@@ -11,9 +11,13 @@ session_start();
 if(isset($_SESSION['success']) && !empty($_SESSION['success'])){
     echo "<h3>登入成功</h3>";
     echo "<a href='login.php'>回登入頁</a>";
+    echo "<br>";
+    echo "<a href='logout.php'>登出</a>";
 }else{
+    $_SESSION['error']="沒有登入相關驗證，非法登入";
     header("location:login.php");
-    // echo "沒有登入相關驗證，非法登入";
+    // 沒有session
+    
 }
 ?>
 
