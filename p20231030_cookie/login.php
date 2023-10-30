@@ -50,15 +50,15 @@
 <body>
     <div class="login-block">
         <?php
-        session_start();
-        if (isset($_SESSION['error'])) {
-            echo "<span style='color:red'>" . $_SESSION['error'] . "</span>";
+        date_default_timezone_set("Asia/Taipei");
+        if (isset($_COOKIE['error'])) {
+            echo "<span style='color:red'>" . $_COOKIE['error'] . "</span>";
             // 確認有資料，echo在client端文字
-            unset($_SESSION['error']);
+            unset($_COOKIE['error']);
             // 不設定意思是，在記憶體中刪除(最終會被刪除，曾經存在過)
         }
-        if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-            echo $_SESSION['success']."歡迎你!";
+        if (isset($_COOKIE['success']) && !empty($_COOKIE['success'])) {
+            echo $_COOKIE['success']."歡迎你!";
         }else{
         ?>
 
