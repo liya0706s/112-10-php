@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>線上月曆</title>
     <style>
-        table,
-        th,
-        tr,
-        td {
+
+        table,th,tr,td {
             border-collapse: collapse;
             border: 3px solid #999;
         }
@@ -25,6 +23,7 @@
 
         a {
             display: inline;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -51,6 +50,7 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
 ?>
 
 <div style='width:264px;display:flex;margin:auto;justify-content:space-between'>
+
 <?php
 $nextYear=$year;
 $prevYear=$year;
@@ -74,7 +74,7 @@ if(($month-1)<1){
     <a href="?year=<?$nextYear;?>&?month=<?=$next;?>">下個月</a>
 </div>
 
-<table>
+<table style='width:264px;display:block;margin:auto'>
     <tr>
         <td>日</td>
         <td>一</td>
