@@ -59,6 +59,7 @@
         }
         if (isset($_COOKIE['success']) && !empty($_COOKIE['success'])) {
             echo $_COOKIE['success']."歡迎你!";
+            echo "<a href='member.php'> 回會員頁 </a>";
         }else{
         ?>
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
-unset($_SESSION['success']);
+setcookie('success','',time()-1);
+
 header("location:login.php");
 // 回首頁，這邊是登入頁

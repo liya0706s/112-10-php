@@ -1,6 +1,6 @@
 <?php
 session_start();
-date_default_timezone_get('Asia/Taipei');
+date_default_timezone_set('Asia/Taipei');
 if($_POST['acc']=='admin' && $_POST['pw']=='1234'){
 
     $_SESSION['success']=$_POST['acc'];
