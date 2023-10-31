@@ -1,3 +1,7 @@
+<?php
+include_once "session.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +12,14 @@
 <body>
 <?php
 include_once "header.php";
-session_start();
+
 if(isset($_SESSION['success']) && !empty($_SESSION['success'])){
     echo "<h3>登入成功</h3>";
     echo "<a href='login.php'>回登入頁</a>";
     echo "<br>";
     echo "<a href='logout.php'>登出</a>";
 }else{
-    setcookie("error","帳號或密碼錯誤，重新登入",time()+5);
+    $_SESSION['error']="帳號或密碼錯誤，重新登入";
     header("location:login.php");    
 }
 ?>
