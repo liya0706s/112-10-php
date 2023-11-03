@@ -97,7 +97,7 @@ if(($month-1)<1){
 
             if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
                 echo date("j", $thisCellDate);
-                // 月份中的第几天，没有补零	1 到 31
+                // 月份中的第幾天，没有補零	1 到 31
             }
             echo "</td>";
         }
