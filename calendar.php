@@ -67,11 +67,9 @@ if(($month-1)<1){
 }else{
     $prev=$month-1;
 }
-
 ?>
-
-    <a href="?year=<?$prevYear;?>&?month=<?=$prev;?>">上個月</a>
-    <a href="?year=<?$nextYear;?>&?month=<?=$next;?>">下個月</a>
+    <a href="?year=<?=$prevYear;?>&month=<?=$prev;?>">上個月</a>
+    <a href="?year=<?=$nextYear;?>&month=<?=$next;?>">下個月</a>
 </div>
 
 <table style='width:264px;display:block;margin:auto'>
