@@ -9,6 +9,20 @@
         .container {
             background-color: lightgray;
             width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            margin:auto;
+            justify-content: center;
+        }
+        table{
+            display: flex;
+        }
+
+        .asider {
+        }
+
+        .asider2 {
+            margin:auto;
         }
 
         table,
@@ -20,11 +34,6 @@
             border: 1px solid #999;
             margin: auto;
             text-align: center;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
         }
 
         tr {
@@ -48,6 +57,8 @@
 </head>
 
 <?php
+
+header("Cache-Control: no-cache, must-revalidate");
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];
@@ -92,7 +103,7 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
 </div>
 
 <div class="container">
-    <table style='width:264px;display:flex;flex-wrap:wrap;margin:auto' class="table">
+    <table style='width:264px;margin:auto' class="table">
         <tr>
             <td>SUN</td>
             <td>MON</td>
@@ -128,4 +139,21 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
         <asider class="asider">
             <img src="./calendar_img/holiday.jpeg" alt="" width="400" height="450">
         </asider>
+        <div style=width:264px class="asider2">
+            <?php
+            echo date("G:i:s");
+            ?>
+        </div>
 </div>
+
+<script>
+    function updateTime() {
+        var now = new Date();
+        var timeString = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        document.getElementById("time").innerHTML = timeString;
+    }
+
+    setInterval(updateTime, 1000);
+</script>
+
+<div id="time"></div>
