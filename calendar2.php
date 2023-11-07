@@ -7,46 +7,43 @@
     <title>線上月曆</title>
     <style>
         .container {
-            background-color: lightgray;
-            width: 80%;
+            /* background-color: lightgray; */
+            background-image: url('https://picsum.photos/id/25/5000/3333/');
+            /* width: 90%; */
+            height: 85vh;
             display: flex;
             flex-wrap: wrap;
             margin:auto;
             justify-content: center;
+            align-items: center;
         }
         table{
             display: flex;
         }
 
-        .asider {
-        }
-
-        .asider2 {
-            margin:auto;
-        }
-
         table,
-        th,
         tr,
         td {
             background-color: white;
             border-collapse: collapse;
-            border: 1px solid #999;
+            /* border: 1px solid lightslategray; */
             margin: auto;
             text-align: center;
         }
 
-        tr {
-            padding: 5px 10px;
-        }
-
         td {
+            width: 80px;
+            height: 50px;
             /* border: 1px solid #999; */
             /* border-collapse: collapse; */
-            padding: 5px 10px;
-            /* padding抓 1:2或1:3 */
+            padding: 5px 5px;
+            /* padding 內距 上下5px 左右5px */
             text-align: center;
-            /* emmet:tac+tab */
+        }
+
+        td:hover {
+            background-color: lightblue;
+            color: lightslategray;
         }
 
         a {
@@ -103,15 +100,15 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
 </div>
 
 <div class="container">
-    <table style='width:264px;margin:auto' class="table">
+    <table>
         <tr>
-            <td>SUN</td>
+            <td style='background:pink'>SUN</td>
             <td>MON</td>
             <td>TUE</td>
             <td>WED</td>
-            <td>THUR</td>
+            <td>THU</td>
             <td>FRI</td>
-            <td>SAT</td>
+            <td style='background:pink'>SAT</td>
         </tr>
 
         <?php
@@ -137,23 +134,6 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
         echo "</table>";
         ?>
         <asider class="asider">
-            <img src="./calendar_img/holiday.jpeg" alt="" width="400" height="450">
+            <!-- <img src="./calendar_img/jan.jpeg" alt=""> -->
         </asider>
-        <div style=width:264px class="asider2">
-            <?php
-            echo date("G:i:s");
-            ?>
-        </div>
 </div>
-
-<script>
-    function updateTime() {
-        var now = new Date();
-        var timeString = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        document.getElementById("time").innerHTML = timeString;
-    }
-
-    setInterval(updateTime, 1000);
-</script>
-
-<div id="time"></div>
