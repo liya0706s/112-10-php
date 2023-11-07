@@ -4,20 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>線上月曆</title>
+    <title>線上萬年曆</title>
     <style>
         .container {
-            /* background-color: lightgray; */
-            background-image: url('https://picsum.photos/id/25/5000/3333/');
+            width: 100%;
+            background-color: lightgray;
+            /* background-image: url('https://picsum.photos/id/25/5000/3333/'); */
             /* width: 90%; */
             height: 85vh;
             display: flex;
             flex-wrap: wrap;
-            margin:auto;
+            margin: auto;
             justify-content: center;
             align-items: center;
+            /* justify-content: space-around; */
         }
-        table{
+
+        table {
             display: flex;
         }
 
@@ -46,16 +49,31 @@
             color: lightslategray;
         }
 
+        .nav {
+            display: flex;
+            justify-content: space-around;
+        }
+
         a {
             display: inline;
             margin-bottom: 10px;
+        }
+
+        .bt_left {
+            background-color: lightgoldenrodyellow;
+            width: 75px;
+            height: 75px;
+        }
+
+        .bt_right {
+            background-color: lightseagreen;
+            width: 75px;
+            height: 75px;
         }
     </style>
 </head>
 
 <?php
-
-header("Cache-Control: no-cache, must-revalidate");
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];
@@ -76,7 +94,8 @@ $weeks = ceil(($thisMonthDays + $thisFirstDate) / 7);
 $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirstDay)));
 ?>
 
-<div style='width:264px;display:flex;margin:auto;justify-content:space-between' class="mid">
+<div class="nav">
+    <!-- style='width:264px;display:flex;margin:auto;justify-content:space-between' -->
 
     <?php
     $nextYear = $year;
@@ -96,44 +115,50 @@ $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirs
     }
     ?>
     <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>">上個月</a>
+    
     <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">下個月</a>
 </div>
 
 <div class="container">
-    <table>
-        <tr>
-            <td style='background:pink'>SUN</td>
-            <td>MON</td>
-            <td>TUE</td>
-            <td>WED</td>
-            <td>THU</td>
-            <td>FRI</td>
-            <td style='background:pink'>SAT</td>
-        </tr>
+    <div class="bt_left">
+        123
+    </div>
+    <div class="table">
+        <table>
+            <tr>
+                <td style='color:red'>SUN</td>
+                <td>MON</td>
+                <td>TUE</td>
+                <td>WED</td>
+                <td>THU</td>
+                <td>FRI</td>
+                <td style='color:red'>SAT</td>
+            </tr>
 
-        <?php
-        for ($i = 0; $i < $weeks; $i++) {
-            echo "<tr>";
-            for ($j = 0; $j < 7; $j++) {
-                $addDays = 7 * $i + $j;
-                $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
-                if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
-                    echo "<td style='background:pink'>";
-                } else {
-                    echo "<td>";
-                }
+            <?php
+            for ($i = 0; $i < $weeks; $i++) {
+                echo "<tr>";
+                for ($j = 0; $j < 7; $j++) {
+                    $addDays = 7 * $i + $j;
+                    $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
+                    if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
+                        echo "<td style='color:red'>";
+                    } else {
+                        echo "<td>";
+                    }
 
-                if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
-                    echo date("j", $thisCellDate);
-                    // 月份中的第幾天，没有補零	1 到 31
+                    if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
+                        echo date("j", $thisCellDate);
+                        // 月份中的第幾天，没有補零	1 到 31
+                    }
+                    echo "</td>";
                 }
-                echo "</td>";
+                echo "</tr>";
             }
-            echo "</tr>";
-        }
-        echo "</table>";
-        ?>
-        <asider class="asider">
-            <!-- <img src="./calendar_img/jan.jpeg" alt=""> -->
-        </asider>
+            echo "</table>";
+            ?>
+    </div>
+    <asider class="bt_right">
+        456
+    </asider>
 </div>
