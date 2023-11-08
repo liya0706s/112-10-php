@@ -65,18 +65,21 @@ switch ($month) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>線上萬年曆</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             font-family: 'Courier New', Courier, monospace;
+            
         }
-        h1{
-            font-family:Arial, Helvetica, sans-serif;
-            font-size: 40px;
+
+        h1 {
+            /* font-family: Arial, Helvetica, sans-serif; */
+            font-size: 50px;
             text-align: center;
             color: brown;
-            line-height: 1.4;
-            margin-top: 0;
-            margin-bottom: 0;
+            /* line-height: 1.4; */
+            margin-top: 35;
+            margin-bottom: 35;
         }
 
         body {
@@ -84,27 +87,35 @@ switch ($month) {
              echo $Bg; 
             ); */
             background-size: cover;
+            background-image: url(./calendar_img/background-image-60.jpg);
+            background-size: cover;
         }
 
         .container {
             width: 100%;
             /* background-color: #DFDFDF; */
-            /* background-image: url('https://picsum.photos/id/25/5000/3333/'); */
+            background-color: transparent;
             height: 85vh;
             display: flex;
             flex-wrap: wrap;
             margin: auto;
             align-items: center;
             justify-content: space-evenly;
+            margin-top: 0;
         }
 
         .table {
-            /* background-color: lavender; */
+            background-color: white;
             width: 600px;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .th {
+            font-weight: bold;
+            /* font-size: 50px; */
         }
 
         table,
@@ -121,6 +132,7 @@ switch ($month) {
             padding: 5px 5px;
             /* padding 內距 上下5px 左右5px */
             text-align: center;
+            font-size: 20px;
         }
 
         td:hover {
@@ -131,16 +143,29 @@ switch ($month) {
         .nav {
             display: flex;
             width: 100%;
+            margin:0;
         }
 
         .form {
-            background-color: lightcyan;
+            /* background-color: lightcyan; */
             width: 50%;
+            height: 5vh;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* text-align: center; */
+            /* text-align: center; */   
         }
+
+        [type="text"]{
+            height: 2.5vh;
+        }
+
+        [type="submit"]{
+            height: 3vh;
+            font-size: 15.5px;
+        }
+        
 
         .home {
             /* background-color: brown; */
@@ -152,7 +177,7 @@ switch ($month) {
             height: 2vh;
         }
 
-        .home>a {
+        .home > a {
             text-decoration: none;
             font-size: 20px;
             border: 1px #f79400 solid;
@@ -171,7 +196,7 @@ switch ($month) {
         .table_tri {
             display: flex;
             justify-content: space-evenly;
-            align-items: center;
+            align-items:center;
         }
 
         .table_two {
@@ -181,42 +206,36 @@ switch ($month) {
 
         h2 {
             text-align: center;
-            margin-bottom: 10px;
+            margin: 0px;
+            font-size: 40px;
         }
 
-        .bt_left {
-            background-color: #DFDFDF;
-            border-radius: 50px;
-            width: 50px;
-            height: 50px;
-            padding-bottom:2px;
-
+        .bt_left, .bt_right{
+            /* background-color: #f79400; */
+            height:50vh;
+            width:auto;
+            display: flex;
+            align-items: center;
         }
 
-        .bt_right {
-            background-color: #DFDFDF;
-            border-radius: 50px;
-        }
 
         .bt_right>a,
         .bt_left>a {
-            text-decoration: none;
             font-size: 40px;
             font-weight: bolder;
-            color: whitesmoke;
+            color: #C5C6C7;
             text-align: center;
-            margin: auto;
+            
+            margin-left: 10px;
         }
 
         .asider {
             /* background-color: lightseagreen; */
             align-items: center;
             padding: 20px;
+            height: 80vh;
         }
 
-        .th {
-            font-weight: bold;
-        }
 
         .weekend {
             background: pink;
@@ -287,7 +306,10 @@ switch ($month) {
             <form action="check.php" method="get">
                 <input type="text" placeholder="年份" name="year">
                 <input type="text" placeholder="月份" name="month">
-                <input type="submit" value="搜尋">
+                <button type="submit">Search
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <!-- <input type="submit" value="搜尋"> -->
             </form>
         </div>
 
@@ -316,15 +338,17 @@ switch ($month) {
                     $prev = $month - 1;
                 }
                 ?>
-                <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>"> &lArr; </a>
+                <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>">
+                    <i class="fa-solid fa-circle-left"></i>
+                </a>
 
             </div>
             <div class="table_two">
                 <h2 class="title">
                     <?php
-                    // echo "<h2 style='text-align:center'>";
-                    echo date("西元{$year}年{$month}月");
-                    // echo "</h2>";
+
+                    echo date("F") . "&nbsp;&nbsp;";
+                    echo date("Y");
                     ?>
                 </h2>
 
@@ -408,7 +432,9 @@ switch ($month) {
                 // }
                 ?>
 
-                <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>"> &rArr; </a>
+                <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">
+                    <i class="fa-solid fa-circle-right"></i>
+                </a>
             </div>
         </div>
 
