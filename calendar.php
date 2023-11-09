@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>線上月曆</title>
+    <title>Document</title>
     <style>
         table,
         th,
@@ -23,128 +22,82 @@
             /* emmet:tac+tab */
         }
 
-        a {
-            display: inline;
-            margin-bottom: 10px;
+        ul{
+            list-style-type: none;
+            padding: 0;
+            margin: 15px;
+            
         }
 
-        .weekend {
-            background: pink;
-        }
-
-        .current-date {
-            font-weight: bold;
+        ul li {
+            display: inline-block;
+            font-size: 14px;
         }
     </style>
 </head>
+<body>
+    <ul>
+        <li><a href="01.php">一月</a></li>
+        <li><a href="02.php">二月</a></li>
+        <li><a href="03.php">三月</a></li>
+        <li><a href="04.php">四月</a></li>
+        <li><a href="05.php">五月</a></li>
+        <li><a href="06.php">六月</a></li>
+        <li><a href="07.php">七月</a></li>
+        <li><a href="08.php">八月</a></li>
+        <li><a href="09.php">九月</a></li>
+        <li><a href="10.php">十月</a></li>
+        <li><a href="11.php">十一月</a></li>
+        <li><a href="12.php">十二月</a></li>
+    </ul>
+</body>
+</html>
 
 <?php
+    echo "<h3>";
+    echo date("西元Y年m月");
+    echo "</h3>";
+   
+    $thisMonth = date("Y");
+    // 這個月的第一天
+    $thisFirstDay = date("Y-m-1");
+    $thisFirstDate = date('w', strtotime($thisFirstDay));
+    $thisMonthDays = date("t");
+    $thisLastDay = date("Y-m-$thisMonthDays");
 
-if (isset($_GET['month']) && isset($_GET['year'])) {
-    $month = $_GET['month'];
-    $year = $_GET['year'];
-} else {
-    $month = date('m');
-    $year = date('Y');
+    $weeks=ceil(($thisMonthDays+$thisFirstDate)/7);
+    
+    $firstCell=date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirstDay)));
+
+    echo "<table>";
+    echo "<tr>";
+    echo "<td>日</td>";
+    echo "<td>一</td>";
+    echo "<td>二</td>";
+    echo "<td>三</td>";
+    echo "<td>四</td>";
+    echo "<td>五</td>";
+    echo "<td>六</td>";
+    echo "</tr>";
+
+    for ($i = 0; $i < $weeks ; $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < 7; $j++) {
+            $addDays=7*$i+$j;
+            $thisCellDate=strtotime("+$addDays days", strtotime($firstCell));
+            if(date('w', $thisCellDate)==0 || date('w',$thisCellDate)==6){
+                echo "<td style='background:pink'>";
+            } else {
+                echo "<td>";
+            }
+
+            if(date("m", $thisCellDate)==date("m", strtotime($thisFirstDay))) {
+                echo date("j", $thisCellDate);
+                // 顯示每一格td的日期
+            }
+            echo "</td>";
+        }
+    echo "</tr>";
 }
 
-echo "<h3 style='text-align:center'>";
-echo date("西元{$year}年{$month}月");
-echo "</h3>";
-$thisFirstDay = date("{$year}-{$month}-1");
-$thisFirstDate = date('w', strtotime($thisFirstDay));
-$thisMonthDays = date("t");
-$thisLastDay = date("{$year}-{$month}-$thisMonthDays");
-$weeks = ceil(($thisMonthDays + $thisFirstDate) / 7);
-$firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirstDay)));
-?>
-
-<div style='width:264px;display:flex;margin:auto;justify-content:space-between'>
-
-    <?php
-    $nextYear = $year;
-    $prevYear = $year;
-    if (($month + 1) > 12) {
-        $next = 1;
-        $nextYear = $year + 1;
-    } else {
-        $next = $month + 1;
-    }
-
-    if (($month - 1) < 1) {
-        $prev = 12;
-        $prevYear = $year - 1;
-    } else {
-        $prev = $month - 1;
-    }
-    ?>
-    <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>">上個月</a>
-    <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">下個月</a>
-</div>
-
-<table style='width:264px;display:block;margin:auto'>
-    <tr>
-        <td>日</td>
-        <td>一</td>
-        <td>二</td>
-        <td>三</td>
-        <td>四</td>
-        <td>五</td>
-        <td>六</td>
-    </tr>
-
-    <?php
-    for ($i = 0; $i < $weeks; $i++) {
-        // 外部迴圈，用於迭代每一周
-        // $weeks 是指這個的周數，用於確定要生成多少行
-        echo "<tr>";
-        // 在每週的開始，建立一個新的表格行
-        for ($j = 0; $j < 7; $j++) {
-            // 這是內部迴圈，用於迭代一週中的每一天（星期日到星期六）
-            $addDays = 7 * $i + $j;
-            // 以上這行代碼計算了$thisCellDate 的日期是在這個月的第幾天
-            // 這是通過將星期數（$j）乘以7（一週七天）再加上週數（$i）來計算的
-            $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
-            // 計算 $thisCellDate，即表格單元格的日期
-            // 它是從 $firstCell 開始的一個日期，加上 $addDays 天，以得到正確的日期
-            // 以上兩行代碼的目的是計算:每個表格單元格中應該顯示的日期，以便填充整個月份的日曆
-            // 以確保日曆顯示的日期是正確的
-
-            // 以下檢查是否為當日日期，如果是，添加 CSS 樣式在style中
-            $todayDate = date("Y-m-d", $thisCellDate) === date("Y-m-d");
-
-            $isWeekend = date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6;
-
-            // 套用 CSS 類別
-            $tdClass = "";
-            if ($isWeekend) {
-                $tdClass .= "weekend";
-            }
-            if ($todayDate) {
-                $tdClass .= " current-date";
-            }
-
-            echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
-        }
-        echo "</tr>";
-    }
-
-    // if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
-    //     echo "<td style='background:pink'>";
-    // } else {
-    //     echo "<td>";
-    // 如果不是週末，則建立一個標準的表格單元格
-    // }
-
-    // if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
-    //     echo date("j", $thisCellDate);
-    // 顯示 $thisCellDate 中的日期（月份中的第幾天）
-    //         }
-    //         echo "</td>";
-    //     }
-    //     echo "</tr>";
-    // }
-
-    echo "</table>";
-
-    ?>
+echo "</table>";
