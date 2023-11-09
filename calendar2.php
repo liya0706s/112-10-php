@@ -69,6 +69,15 @@ switch ($month) {
         * {
             font-family: 'Courier New', Courier, monospace;
         }
+        h1{
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 40px;
+            text-align: center;
+            color: brown;
+            line-height: 1.4;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
 
         body {
             /* background-image: url(/calendar_img/
@@ -79,7 +88,7 @@ switch ($month) {
 
         .container {
             width: 100%;
-            background-color: #DFDFDF;
+            /* background-color: #DFDFDF; */
             /* background-image: url('https://picsum.photos/id/25/5000/3333/'); */
             height: 85vh;
             display: flex;
@@ -119,10 +128,40 @@ switch ($month) {
             color: lightslategray;
         }
 
-        /* .nav {
+        .nav {
             display: flex;
-            justify-content: space-around;
-        } */
+            width: 100%;
+        }
+
+        .form {
+            background-color: lightcyan;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* text-align: center; */
+        }
+
+        .home {
+            /* background-color: brown; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* margin: auto; */
+            width: 50%;
+            height: 2vh;
+        }
+
+        .home>a {
+            text-decoration: none;
+            font-size: 20px;
+            border: 1px #f79400 solid;
+            border-radius: 10px;
+            padding: 5px;
+            color: white;
+            background-color: #f79400;
+        }
+
 
         a {
             display: inline;
@@ -135,12 +174,28 @@ switch ($month) {
             align-items: center;
         }
 
+        .table_two {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
         .bt_left {
-            /* background-color: lightgoldenrodyellow; */
+            background-color: #DFDFDF;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            padding-bottom:2px;
+
         }
 
         .bt_right {
-            /* background-color: lightpink; */
+            background-color: #DFDFDF;
+            border-radius: 50px;
         }
 
         .bt_right>a,
@@ -149,6 +204,8 @@ switch ($month) {
             font-size: 40px;
             font-weight: bolder;
             color: whitesmoke;
+            text-align: center;
+            margin: auto;
         }
 
         .asider {
@@ -157,8 +214,8 @@ switch ($month) {
             padding: 20px;
         }
 
-        .form {
-            text-align: center;
+        .th {
+            font-weight: bold;
         }
 
         .weekend {
@@ -170,8 +227,8 @@ switch ($month) {
             font-size: 20px;
         }
 
-        .current-date:hover{
-            color:black;
+        .current-date:hover {
+            color: black;
         }
     </style>
 </head>
@@ -187,9 +244,10 @@ switch ($month) {
         $year = date('Y');
     }
 
-    echo "<h1 style='text-align:center'>";
-    echo date("西元{$year}年{$month}月");
-    echo "</h1>";
+    // echo "<h1 style='text-align:center'>";
+    // echo date("西元{$year}年{$month}月");
+    // echo "</h1>";
+
     $thisFirstDay = date("{$year}-{$month}-1");
     $thisFirstDate = date('w', strtotime($thisFirstDay));
     $thisMonthDays = date("t");
@@ -221,7 +279,9 @@ switch ($month) {
         <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">下個月</a>
     </div> -->
     <!-- 原本是上下個月的a連結在網頁上方 -->
-
+    <h1 class="header">
+        Calendar
+    </h1>
     <nav class="nav">
         <div class="form">
             <form action="check.php" method="get">
@@ -235,7 +295,6 @@ switch ($month) {
             <a href="calendar2.php">TODAY</a>
         </div>
     </nav>
-
 
     <div class="container">
         <div class="table_tri">
@@ -260,62 +319,74 @@ switch ($month) {
                 <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>"> &lArr; </a>
 
             </div>
-
-            <div class="table">
-                <table>
-                    <tr>
-                        <td style='color:red'>SUN</td>
-                        <td>MON</td>
-                        <td>TUE</td>
-                        <td>WED</td>
-                        <td>THU</td>
-                        <td>FRI</td>
-                        <td style='color:red'>SAT</td>
-                    </tr>
-
+            <div class="table_two">
+                <h2 class="title">
                     <?php
-                    for ($i = 0; $i < $weeks; $i++) {
-                        echo "<tr>";
-                        for ($j = 0; $j < 7; $j++) {
-                            $addDays = 7 * $i + $j;
-                            $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
-
-                            // 以下檢查是否為當日日期，如果是，添加 CSS 樣式在style中
-                            $todayDate = date("Y-m-d", $thisCellDate) === date("Y-m-d");
-
-                            $isWeekend = date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6;
-
-                            // 套用 CSS 類別
-                            $tdClass = "";
-                            if ($isWeekend) {
-                                $tdClass .= "weekend";
-                            }
-                            if ($todayDate) {
-                                $tdClass .= " current-date";
-                            }
-
-                            echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
-                        }
-                        echo "</tr>";
-                    }
-
-
-                    //         if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
-                    //             echo "<td style='color:red'>";
-                    //         } else {
-                    //             echo "<td>";
-                    //         }
-
-                    //         if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
-                    //             echo date("j", $thisCellDate);
-                    //             // 月份中的日期
-                    //         }
-                    //         echo "</td>";
-                    //     }
-                    //     echo "</tr>";
-                    // }
-                    echo "</table>";
+                    // echo "<h2 style='text-align:center'>";
+                    echo date("西元{$year}年{$month}月");
+                    // echo "</h2>";
                     ?>
+                </h2>
+
+                <div class="table">
+                    <table>
+                        <tr class="th">
+                            <td style='color:red'>SUN</td>
+                            <td>MON</td>
+                            <td>TUE</td>
+                            <td>WED</td>
+                            <td>THU</td>
+                            <td>FRI</td>
+                            <td style='color:red'>SAT</td>
+                        </tr>
+
+                        <?php
+                        for ($i = 0; $i < $weeks; $i++) {
+                            echo "<tr>";
+                            for ($j = 0; $j < 7; $j++) {
+                                $addDays = 7 * $i + $j;
+                                $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
+
+
+                                // 以下檢查是否為當日日期，如果是，添加 CSS 樣式在style中
+                                $todayDate = date("Y-m-d", $thisCellDate) === date("Y-m-d");
+
+                                $isWeekend = date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6;
+
+                                // 套用 CSS 類別
+                                $tdClass = "";
+                                if (date('m', $thisCellDate) == date('m', strtotime($thisFirstDay))) {
+                                    if ($isWeekend) {
+                                        $tdClass .= "weekend";
+                                    }
+                                    if ($todayDate) {
+                                        $tdClass .= " current-date";
+                                    }
+                                }
+
+                                echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
+                            }
+                            echo "</tr>";
+                        }
+
+
+                        //         if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
+                        //             echo "<td style='color:red'>";
+                        //         } else {
+                        //             echo "<td>";
+                        //         }
+
+                        //         if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
+                        //             echo date("j", $thisCellDate);
+                        //             // 月份中的日期
+                        //         }
+                        //         echo "</td>";
+                        //     }
+                        //     echo "</tr>";
+                        // }
+                        echo "</table>";
+                        ?>
+                </div>
             </div>
 
             <div class="bt_right">
