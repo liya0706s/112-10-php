@@ -10,7 +10,7 @@ switch ($Weekday) {
         $Weekdayname = "星期一($Weekday)";
         break;
     case "Tuesday":
-        $Bg = "../calendar_img/983.jpeg";
+        $Bg = "../calendar_img/may.jpeg";
         $Weekdayname = "星期二($Weekday)";
         break;
     case "Wednesday":
@@ -22,11 +22,11 @@ switch ($Weekday) {
         $Weekdayname = "星期四($Weekday)";
         break;
     case "Friday":
-        $Bg = "../calendar_img/xmas.jpeg";
+        $Bg = "../calendar_img/april.jpeg";
         $Weekdayname = "星期五($Weekday)";
         break;
     case "Saturday":
-        $Bg = "../calendar_img/may.jpeg";
+        $Bg = "../calendar_img/july.jpeg";
         $Weekdayname = "星期六($Weekday)";
         break;
 }

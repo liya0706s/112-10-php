@@ -1,12 +1,11 @@
 <?php
 
-if (isset($_GET['month']) && !empty($_GET['month'])) {
+if (isset($_GET['month'])) {
     $month = $_GET['month'];
 } else {
     $month = date('m');
 }
 
-$month = date('m');
 switch ($month) {
     case "1":
         $Bg = "jan.jpeg";
@@ -20,27 +19,27 @@ switch ($month) {
         $Bg = "march.jpeg";
         // $Weekdayname = "星期二($Weekday)";
         break;
-    case "4":
+    case "04":
         $Bg = "april.jpeg";
         // $Weekdayname = "星期三($Weekday)";
         break;
-    case "5":
+    case "05":
         $Bg = "may.jpeg";
         // $Weekdayname = "星期四($Weekday)";
         break;
-    case "6":
+    case "06":
         $Bg = "june.jpeg";
         // $Weekdayname = "星期五($Weekday)";
         break;
-    case "7":
+    case "07":
         $Bg = "july.jpeg";
         // $Weekdayname = "星期六($Weekday)";
         break;
-    case "8":
+    case "08":
         $Bg = "aug.jpeg";
         // $Weekdayname = "星期六($Weekday)";
         break;
-    case "9":
+    case "09":
         $Bg = "sep.jpeg";
         // $Weekdayname = "星期六($Weekday)";
         break;
@@ -67,35 +66,42 @@ switch ($month) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>線上萬年曆</title>
     <style>
+        * {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
         body {
-            background-image: url(/calendar_img/<?php echo $Bg; ?>);
+            /* background-image: url(/calendar_img/
+             echo $Bg; 
+            ); */
+            background-size: cover;
         }
 
         .container {
-            width: 80%;
-            background-color: lightgray;
+            width: 100%;
+            background-color: #DFDFDF;
             /* background-image: url('https://picsum.photos/id/25/5000/3333/'); */
             height: 85vh;
             display: flex;
             flex-wrap: wrap;
             margin: auto;
-            /* justify-content: center; */
             align-items: center;
-            /* justify-content: space-around; */
+            justify-content: space-evenly;
         }
 
-        table {
+        .table {
+            /* background-color: lavender; */
+            width: 600px;
+            padding: 20px;
             display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         table,
         tr,
         td {
             background-color: white;
-            border-collapse: collapse;
-            /* border: 1px solid lightslategray; */
-            margin: auto;
-            text-align: center;
         }
 
         td {
@@ -109,41 +115,63 @@ switch ($month) {
         }
 
         td:hover {
-            background-color: lightblue;
+            background-color: lightyellow;
             color: lightslategray;
         }
 
-        .nav {
+        /* .nav {
             display: flex;
             justify-content: space-around;
-        }
+        } */
 
         a {
             display: inline;
             margin-bottom: 10px;
         }
 
+        .table_tri {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
         .bt_left {
-            background-color: lightgoldenrodyellow;
-            width: 75px;
-            height: 75px;
+            /* background-color: lightgoldenrodyellow; */
         }
 
         .bt_right {
-            background-color: lightseagreen;
-            width: 75px;
-            height: 75px;
+            /* background-color: lightpink; */
         }
 
-        @font-face {
-            font-family: 'cwTeXYen';
-            font-style: normal;
-            font-weight: 500;
-            src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot);
-            src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot?#iefix) format('embedded-opentype'),
-                url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2) format('woff2'),
-                url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff) format('woff'),
-                url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
+        .bt_right>a,
+        .bt_left>a {
+            text-decoration: none;
+            font-size: 40px;
+            font-weight: bolder;
+            color: whitesmoke;
+        }
+
+        .asider {
+            /* background-color: lightseagreen; */
+            align-items: center;
+            padding: 20px;
+        }
+
+        .form {
+            text-align: center;
+        }
+
+        .weekend {
+            background: pink;
+        }
+
+        .current-date {
+            font-weight: bolder;
+            font-size: 20px;
+        }
+
+        .current-date:hover{
+            color:black;
         }
     </style>
 </head>
@@ -161,7 +189,7 @@ switch ($month) {
 
     echo "<h1 style='text-align:center'>";
     echo date("西元{$year}年{$month}月");
-    echo "</h3>";
+    echo "</h1>";
     $thisFirstDay = date("{$year}-{$month}-1");
     $thisFirstDate = date('w', strtotime($thisFirstDay));
     $thisMonthDays = date("t");
@@ -170,74 +198,154 @@ switch ($month) {
     $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirstDay)));
     ?>
 
-    <div class="nav">
-        <!-- style='width:264px;display:flex;margin:auto;justify-content:space-between' -->
+    <!-- <div class="nav"> -->
+    <!-- <?php
+            // $nextYear = $year;
+            // $prevYear = $year;
+            // if (($month + 1) > 12) {
+            //     $next = 1;
+            //     $nextYear = $year + 1;
+            // } else {
+            //     $next = $month + 1;
+            // }
 
-        <?php
-        $nextYear = $year;
-        $prevYear = $year;
-        if (($month + 1) > 12) {
-            $next = 1;
-            $nextYear = $year + 1;
-        } else {
-            $next = $month + 1;
-        }
-
-        if (($month - 1) < 1) {
-            $prev = 12;
-            $prevYear = $year - 1;
-        } else {
-            $prev = $month - 1;
-        }
-        ?>
+            // if (($month - 1) < 1) {
+            //     $prev = 12;
+            //     $prevYear = $year - 1;
+            // } else {
+            //     $prev = $month - 1;
+            // }
+            ?> 
         <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>">上個月</a>
 
         <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">下個月</a>
-    </div>
+    </div> -->
+    <!-- 原本是上下個月的a連結在網頁上方 -->
+
+    <nav class="nav">
+        <div class="form">
+            <form action="check.php" method="get">
+                <input type="text" placeholder="年份" name="year">
+                <input type="text" placeholder="月份" name="month">
+                <input type="submit" value="搜尋">
+            </form>
+        </div>
+
+        <div class="home">
+            <a href="calendar2.php">TODAY</a>
+        </div>
+    </nav>
+
 
     <div class="container">
-        <div class="bt_left">
-            123
-        </div>
-        <div class="table">
-            <table>
-                <tr>
-                    <td style='color:red'>SUN</td>
-                    <td>MON</td>
-                    <td>TUE</td>
-                    <td>WED</td>
-                    <td>THU</td>
-                    <td>FRI</td>
-                    <td style='color:red'>SAT</td>
-                </tr>
-
+        <div class="table_tri">
+            <div class="bt_left">
                 <?php
-                for ($i = 0; $i < $weeks; $i++) {
-                    echo "<tr>";
-                    for ($j = 0; $j < 7; $j++) {
-                        $addDays = 7 * $i + $j;
-                        $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
-                        if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
-                            echo "<td style='color:red'>";
-                        } else {
-                            echo "<td>";
-                        }
+                $nextYear = $year;
+                $prevYear = $year;
+                // if (($month + 1) > 12) {
+                //     $next = 1;
+                //     $nextYear = $year + 1;
+                // } else {
+                //     $next = $month + 1;
+                // }
 
-                        if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
-                            echo date("j", $thisCellDate);
-                            // 月份中的第幾天，没有補零	1 到 31
-                        }
-                        echo "</td>";
-                    }
-                    echo "</tr>";
+                if (($month - 1) < 1) {
+                    $prev = 12;
+                    $prevYear = $year - 1;
+                } else {
+                    $prev = $month - 1;
                 }
-                echo "</table>";
                 ?>
+                <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>"> &lArr; </a>
+
+            </div>
+
+            <div class="table">
+                <table>
+                    <tr>
+                        <td style='color:red'>SUN</td>
+                        <td>MON</td>
+                        <td>TUE</td>
+                        <td>WED</td>
+                        <td>THU</td>
+                        <td>FRI</td>
+                        <td style='color:red'>SAT</td>
+                    </tr>
+
+                    <?php
+                    for ($i = 0; $i < $weeks; $i++) {
+                        echo "<tr>";
+                        for ($j = 0; $j < 7; $j++) {
+                            $addDays = 7 * $i + $j;
+                            $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
+
+                            // 以下檢查是否為當日日期，如果是，添加 CSS 樣式在style中
+                            $todayDate = date("Y-m-d", $thisCellDate) === date("Y-m-d");
+
+                            $isWeekend = date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6;
+
+                            // 套用 CSS 類別
+                            $tdClass = "";
+                            if ($isWeekend) {
+                                $tdClass .= "weekend";
+                            }
+                            if ($todayDate) {
+                                $tdClass .= " current-date";
+                            }
+
+                            echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
+                        }
+                        echo "</tr>";
+                    }
+
+
+                    //         if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
+                    //             echo "<td style='color:red'>";
+                    //         } else {
+                    //             echo "<td>";
+                    //         }
+
+                    //         if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
+                    //             echo date("j", $thisCellDate);
+                    //             // 月份中的日期
+                    //         }
+                    //         echo "</td>";
+                    //     }
+                    //     echo "</tr>";
+                    // }
+                    echo "</table>";
+                    ?>
+            </div>
+
+            <div class="bt_right">
+                <?php
+                $nextYear = $year;
+                $prevYear = $year;
+                if (($month + 1) > 12) {
+                    $next = 1;
+                    $nextYear = $year + 1;
+                } else {
+                    $next = $month + 1;
+                }
+
+                // if (($month - 1) < 1) {
+                //     $prev = 12;
+                //     $prevYear = $year - 1;
+                // } else {
+                //     $prev = $month - 1;
+                // }
+                ?>
+
+                <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>"> &rArr; </a>
+            </div>
         </div>
-        <asider class="bt_right">
-            456
+
+        <asider class="asider">
+            <img src="/calendar_img/<?php echo $Bg; ?>" alt="" width="850px">
         </asider>
     </div>
+
     <footer class="footer">
         footer
     </footer>
