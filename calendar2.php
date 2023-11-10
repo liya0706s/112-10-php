@@ -87,10 +87,12 @@ switch ($month) {
             margin-top: 0;
         }
 
+        /* 行事曆表頭 */
         h2 {
             text-align: center;
-            background-color: #f79400;
-            font-size: 40px;
+            /* background-color: #f79400; */
+            font-size: 38px;
+            color: silver;
         }
 
         .table {
@@ -101,7 +103,6 @@ switch ($month) {
             align-items: center;
             justify-content: center;
             border-radius: 25px;
-
         }
 
         .th {
@@ -140,7 +141,7 @@ switch ($month) {
 
         .form {
             /* background-color: lightcyan; */
-            width: 50%;
+            width: 40%;
             height: 5vh;
             border-radius: 10px;
             display: flex;
@@ -161,22 +162,25 @@ switch ($month) {
 
         .home {
             /* background-color: brown; */
+            text-align: center;
+            margin: auto;
             display: flex;
             align-items: center;
-            justify-content: center;
-            /* margin: auto; */
-            width: 50%;
-            height: 2vh;
+            width: 60%;
+            height: 6vh;
         }
 
         .home>a {
+            display: inline-block;
             text-decoration: none;
             font-size: 20px;
-            border: 1px #f79400 solid;
+            border: 2px #f79400 solid;
             border-radius: 10px;
-            padding: 5px;
             color: white;
             background-color: #f79400;
+            text-align: center;
+            margin: auto;
+            padding: 6px;
         }
 
 
@@ -193,28 +197,28 @@ switch ($month) {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            background-color: purple;
+            /* background-color: purple; */
         }
 
         /* h2和行事曆 */
         .table_two {
             display: flex;
             flex-direction: column;
-            background-color: yellow;
+            /* background-color: yellow; */
         }
 
         .bt_left,
         .bt_right {
             /* background-color: #f79400; */
             height: 50vh;
-            width:auto;
+            width: auto;
             display: flex;
             align-items: center;
         }
 
 
         /* 左按鈕 */
-        .bt_left > a {
+        .bt_left>a {
             font-size: 40px;
             font-weight: bolder;
             color: #C5C6C7;
@@ -235,7 +239,7 @@ switch ($month) {
         /* 右邊圖片區 */
         .asider {
             width: 50%;
-            background-color: lightseagreen;
+            /* background-color: lightseagreen; */
             text-align: center;
 
             padding: 20px;
@@ -320,8 +324,17 @@ switch ($month) {
 
                 <h2 class="title">
                     <?php
-                    echo date("F") . "&nbsp;&nbsp;";
-                    echo date("Y");
+                    if (isset($_GET['month']) && isset($_GET['year'])) {
+                        $month = $_GET['month'];
+                        $year = $_GET['year'];
+                        // 使用 strtotime 函數建立日期
+                        $date = strtotime("$year-$month-01");
+                        // 格式化日期
+                        echo date('F Y', $date);
+                    } else {
+                        // 如果未提供 URL 參數，則使用當前日期
+                        echo date('F Y');
+                    }
                     ?>
                 </h2>
 
