@@ -93,7 +93,7 @@ switch ($month) {
             font-size: 40px;
         }
 
-        .table {        
+        .table {
             background-color: white;
             width: 600px;
             /* padding: 20px; */
@@ -101,7 +101,7 @@ switch ($month) {
             align-items: center;
             justify-content: center;
             border-radius: 25px;
-            
+
         }
 
         .th {
@@ -113,7 +113,7 @@ switch ($month) {
         td {
             background-color: white;
             border-collapse: collapse;
-            
+
         }
 
         td {
@@ -135,7 +135,7 @@ switch ($month) {
         .nav {
             display: flex;
             width: 100%;
-            margin:0;
+            margin: 0;
         }
 
         .form {
@@ -146,18 +146,18 @@ switch ($month) {
             display: flex;
             align-items: center;
             justify-content: center;
-            /* text-align: center; */   
+            /* text-align: center; */
         }
 
-        [type="text"]{
+        [type="text"] {
             height: 2.5vh;
         }
 
-        [type="submit"]{
+        [type="submit"] {
             height: 3vh;
             font-size: 15.5px;
         }
-        
+
 
         .home {
             /* background-color: brown; */
@@ -169,7 +169,7 @@ switch ($month) {
             height: 2vh;
         }
 
-        .home > a {
+        .home>a {
             text-decoration: none;
             font-size: 20px;
             border: 1px #f79400 solid;
@@ -187,12 +187,15 @@ switch ($month) {
 
         /* 左右按鈕和行事曆組 */
         .table_tri {
+            /* width: 40%; */
+            height: 75vh;
+            margin-bottom: 50px;
             display: flex;
             justify-content: space-evenly;
-            align-items:center;
+            align-items: center;
             background-color: purple;
         }
-        
+
         /* h2和行事曆 */
         .table_two {
             display: flex;
@@ -200,9 +203,10 @@ switch ($month) {
             background-color: yellow;
         }
 
-        .bt_left, .bt_right{
+        .bt_left,
+        .bt_right {
             /* background-color: #f79400; */
-            height:50vh;
+            height: 50vh;
             width:auto;
             display: flex;
             align-items: center;
@@ -210,26 +214,30 @@ switch ($month) {
 
 
         /* 左按鈕 */
-        .bt_left>a {
+        .bt_left > a {
             font-size: 40px;
             font-weight: bolder;
             color: #C5C6C7;
             text-align: center;
-            margin-left: 10px;
+            margin-right: 15px;
         }
-        
+
         /* 右按鈕 */
         .bt_right>a {
             font-size: 40px;
             font-weight: bolder;
             color: #C5C6C7;
             text-align: center;
-            margin-left: 10px;
+            margin-left: 15px;
         }
 
+
+        /* 右邊圖片區 */
         .asider {
-            /* background-color: lightseagreen; */
-            align-items: center;
+            width: 50%;
+            background-color: lightseagreen;
+            text-align: center;
+
             padding: 20px;
             height: 80vh;
         }
@@ -261,10 +269,6 @@ switch ($month) {
         $year = date('Y');
     }
 
-    // echo "<h1 style='text-align:center'>";
-    // echo date("西元{$year}年{$month}月");
-    // echo "</h1>";
-
     $thisFirstDay = date("{$year}-{$month}-1");
     $thisFirstDate = date('w', strtotime($thisFirstDay));
     $thisMonthDays = date("t");
@@ -273,32 +277,10 @@ switch ($month) {
     $firstCell = date("Y-m-d", strtotime("-$thisFirstDate days", strtotime($thisFirstDay)));
     ?>
 
-    <!-- <div class="nav"> -->
-    <!-- <?php
-            // $nextYear = $year;
-            // $prevYear = $year;
-            // if (($month + 1) > 12) {
-            //     $next = 1;
-            //     $nextYear = $year + 1;
-            // } else {
-            //     $next = $month + 1;
-            // }
-
-            // if (($month - 1) < 1) {
-            //     $prev = 12;
-            //     $prevYear = $year - 1;
-            // } else {
-            //     $prev = $month - 1;
-            // }
-            ?> 
-        <a href="?year=<?= $prevYear; ?>&month=<?= $prev; ?>">上個月</a>
-
-        <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">下個月</a>
-    </div> -->
-    <!-- 原本是上下個月的a連結在網頁上方 -->
     <h1 class="header">
         Calendar
     </h1>
+
     <nav class="nav">
         <div class="form">
             <form action="check.php" method="get">
@@ -307,7 +289,6 @@ switch ($month) {
                 <button type="submit">Search
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-                <!-- <input type="submit" value="搜尋"> -->
             </form>
         </div>
 
@@ -322,12 +303,6 @@ switch ($month) {
                 <?php
                 $nextYear = $year;
                 $prevYear = $year;
-                // if (($month + 1) > 12) {
-                //     $next = 1;
-                //     $nextYear = $year + 1;
-                // } else {
-                //     $next = $month + 1;
-                // }
 
                 if (($month - 1) < 1) {
                     $prev = 12;
@@ -342,9 +317,9 @@ switch ($month) {
 
             </div>
             <div class="table_two">
+
                 <h2 class="title">
                     <?php
-
                     echo date("F") . "&nbsp;&nbsp;";
                     echo date("Y");
                     ?>
@@ -421,13 +396,6 @@ switch ($month) {
                 } else {
                     $next = $month + 1;
                 }
-
-                // if (($month - 1) < 1) {
-                //     $prev = 12;
-                //     $prevYear = $year - 1;
-                // } else {
-                //     $prev = $month - 1;
-                // }
                 ?>
 
                 <a href="?year=<?= $nextYear; ?>&month=<?= $next; ?>">
@@ -437,7 +405,7 @@ switch ($month) {
         </div>
 
         <asider class="asider">
-            <img src="/calendar_img/<?php echo $Bg; ?>" alt="" width="850px">
+            <img src="/calendar_img/<?php echo $Bg; ?>" alt="" width="840px">
         </asider>
     </div>
 
