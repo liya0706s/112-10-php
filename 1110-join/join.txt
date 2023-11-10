@@ -1,0 +1,255 @@
+SELECT * FROM `students`,`dept` where `students`.`dept`=`dept`.`id`
+
+------------------------------------------------------------
+SELECT `students`.*,`dept`.`name` as '' FROM `students`,`dept` where `students`.`dept`=`dept`.`id`;
+
+---------------------------------------------------------
+SELECT `students`.`id`,
+	   `students`.`school_num`,
+       `students`.`name`,
+       `students`.`birthday`,
+       `students`.`uni_id`,
+       `students`.`addr`,
+       `students`.`parents` 
+FROM `students`,
+	 `dept`,
+     `graduate_school`,
+     `status`
+------------------------------------------------------------------
+
+SELECT `students`.`id`,
+	   `students`.`school_num`,
+       `students`.`name`,
+       `students`.`birthday`,
+       `students`.`uni_id`,
+       `students`.`addr`,
+       `students`.`parents`,
+       `dept`.`name` as '',
+       `graduate_school`.`name` as '拨穨厩',
+       `status`.`status` as '拨穨篈'
+FROM `students`,
+	 `dept`,
+     `graduate_school`,
+     `status`
+where `students`.`dept`=`dept`.`id` && 
+	  `students`.`graduate_at`=`graduate_school`.`id`  &&
+      `students`.`status_code`=`status`.`code`
+
+-------------------------------------------------
+
+SELECT `class_code` ,count(*) as '计' FROM `class_student` group by `class_code`
+
+
+----------------------------------------------------
+SELECT `class_code` ,
+        `classes`.`name` as '痁嘿',
+        `classes`.`tutor` as '痁旧畍',
+        count(*) as '计' 
+FROM `class_student`,`classes` 
+WHERE `class_student`.`class_code`=`classes`.`code`
+group by `class_code`
+
+----------------------------------------------------
+SELECT `class_code` ,
+        `classes`.`name` as '痁嘿',
+        `classes`.`tutor` as '痁旧畍',
+        count(*) as '计' 
+FROM `class_student`,`classes` 
+WHERE `class_student`.`class_code`=`classes`.`code`
+group by `class_code`
+order by count(*)
+
+-----------------------------------------------------
+SELECT `class_code` ,
+        `classes`.`name` as '痁嘿',
+        `classes`.`tutor` as '痁旧畍',
+        count(*) as '计' 
+FROM `class_student`,`classes` 
+WHERE `class_student`.`class_code`=`classes`.`code`
+group by `class_code`
+order by count(*)
+limit 5
+
+------------------------------------------------------
+
+SELECT `class_code` ,
+        `classes`.`name` as '痁嘿',
+        `classes`.`tutor` as '痁旧畍',
+        count(*) as '计' ,
+        count(*)/479 as '羆计ゑ'
+        
+FROM `class_student`,`classes` 
+WHERE `class_student`.`class_code`=`classes`.`code`
+group by `class_code`
+order by count(*)
+SELECT `class_code` ,
+        `classes`.`name` as '痁嘿',
+        `classes`.`tutor` as '痁旧畍',
+        count(*) as '计' ,
+        concat(round((count(*)/479)*100),'%') as '羆计ゑ'
+        
+FROM `class_student`,`classes` 
+WHERE `class_student`.`class_code`=`classes`.`code`
+group by `class_code`
+order by count(*)
+-----------------------------------------------
+
+SELECT `dept`.`name`, count(*) as '计'  FROM `students`,`dept` WHERE `students`.`dept`=`dept`.`dept_id` group by `students`.`dept`
+
+----------------------------------------
+
+SELECT * 
+FROM `students`,`class_student`,`dept` 
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id`
+
+-------------------------------------------------
+SELECT `students`.`dept` as '',
+	   count(*) as "计"
+
+FROM `students`,`class_student`,`dept` 
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id`
+GROUP by `students`.`dept`
+
+----------------------------------------------------------------
+SELECT `class_student`.`class_code` as '痁',
+	   `students`.`dept` as '',
+	   count(*) as "计"
+
+FROM `students`,`class_student`,`dept` 
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id`
+GROUP by `class_student`.`class_code`,
+         `students`.`dept`
+
+
+-------------------------------------------------------
+SELECT `class_student`.`class_code` as '痁',
+	   `students`.`dept` as '',
+	   count(*) as "计"
+
+FROM `students`,`class_student`,`dept` 
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id`
+GROUP by 
+         `students`.`dept`,
+         `class_student`.`class_code`
+
+--------------------------------------------------
+SELECT `class_student`.`class_code` as '痁',
+	   `dept`.`name` as '',
+	   count(*) as "计"
+
+FROM `students`,`class_student`,`dept` 
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id`
+GROUP by `class_student`.`class_code`,
+         `students`.`dept`
+
+-------------------------------------------------------
+SELECT `classes`.`name` as '痁',
+	   `dept`.`name` as '',
+	   count(*) as "计"
+
+FROM `students`,`class_student`,`dept` ,`classes`
+
+WHERE `students`.`school_num`=`class_student`.`school_num`  && 
+	  `students`.`dept`=`dept`.`dept_id` && 
+      `class_student`.`class_code`=`classes`.`code`
+      
+GROUP by `class_student`.`class_code`,
+         `students`.`dept`
+
+-------------------------------------------------------
+SELECT `dept`.`name`,count(`id`) 
+from `dept`
+left join `students` on `students`.`dept`=`dept`.`dept_id`
+group by `students`.`dept`
+
+---------------------------------------------------
+SELECT `dept`.`name`,count(`id`) 
+from `students`
+right join `dept` on `students`.`dept`=`dept`.`dept_id`
+group by `students`.`dept`
+
+
+----------------------------------------------------
+SELECT `class_student`.`class_code`,AVG(`student_scores`.`score`) as '痁キА'
+FROM `class_student`,`student_scores`
+where `class_student`.`school_num`=`student_scores`.`school_num`
+GROUP by `class_student`.`class_code`
+
+
+--------------------------------------------------------
+SELECT `class_student`.`class_code`,
+		AVG(`student_scores`.`score`) as '痁キА',
+        (select avg(`student_scores`.`score`) from `student_scores`) as 'キА'
+        
+FROM `class_student`,`student_scores`
+where `class_student`.`school_num`=`student_scores`.`school_num`
+GROUP by `class_student`.`class_code`
+
+----------------------------------------------------------
+SELECT `students`.`name`,`students`.`school_num`,`A`.`name` as '痁' 
+FROM `students`,
+	 (select `class_student`.`school_num`,`classes`.`name` from `class_student`,`classes` where `class_student`.`class_code`=`classes`.`code`)A
+where `students`.`school_num`=`A`.`school_num`
+
+
+----------------------------------------------------------
+SELECT * FROM `students` WHERE `graduate_at`=12
+
+----------------------------------------------------------
+SELECT avg(`student_scores`.`score`) 
+FROM `student_scores` 
+WHERE `student_scores`.`school_num` in(SELECT `students`.`school_num` FROM `students` WHERE `graduate_at`=12);
+
+SELECT avg(`student_scores`.`score`) 
+FROM `student_scores` ,`students`
+WHERE `student_scores`.`school_num` =`students`.`school_num` && `students`.`graduate_at`=12;
+
+
+------------------------------------
+
+SELECT `students`.`name`,`student_scores`.`score` FROM `students`,`student_scores` 
+WHERE `student_scores`.`school_num`=`students`.`school_num`
+
+SELECT `students`.`name`,`student_scores`.`score` 
+FROM `students`,`student_scores` ,`class_student`
+WHERE `student_scores`.`school_num`=`students`.`school_num` &&
+	  `students`.`school_num`=`class_student`.`school_num` &&
+      `class_student`.`class_code`='102'
+ORDER BY `student_scores`.`score` DESC
+
+
+SELECT `student_scores`.`score` 
+FROM `students`,`student_scores` ,`class_student`
+WHERE `student_scores`.`school_num`=`students`.`school_num` &&
+	  `students`.`school_num`=`class_student`.`school_num` &&
+      `class_student`.`class_code`='102'
+
+         
+-----------------------------------------------------------------------
+SELECT 
+    s.name AS '',
+    ss.score AS 'Θ罿',
+    (SELECT COUNT(DISTINCT score) FROM student_scores WHERE score > ss.score) + 1 AS 'Ω'
+FROM 
+    students s
+JOIN 
+    class_student cs ON s.school_num = cs.school_num
+JOIN 
+    student_scores ss ON s.school_num = ss.school_num
+WHERE 
+    cs.class_code = '102'
+ORDER BY 
+    ss.score DESC;
+
+
+
+
+
+
+
+
