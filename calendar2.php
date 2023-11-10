@@ -9,51 +9,39 @@ if (isset($_GET['month'])) {
 switch ($month) {
     case "1":
         $Bg = "jan.jpeg";
-        // $Weekdayname = "星期日($Weekday)";
         break;
     case "2":
         $Bg = "feb.jpeg";
-        // $Weekdayname = "星期一($Weekday)";
         break;
     case "3":
         $Bg = "march.jpeg";
-        // $Weekdayname = "星期二($Weekday)";
         break;
     case "04":
         $Bg = "april.jpeg";
-        // $Weekdayname = "星期三($Weekday)";
         break;
     case "05":
         $Bg = "may.jpeg";
-        // $Weekdayname = "星期四($Weekday)";
         break;
     case "06":
         $Bg = "june.jpeg";
-        // $Weekdayname = "星期五($Weekday)";
         break;
     case "07":
         $Bg = "july.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
     case "08":
         $Bg = "aug.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
     case "09":
         $Bg = "sep.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
     case "10":
         $Bg = "oct.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
     case "11":
         $Bg = "nov.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
     case "12":
         $Bg = "dec.jpeg";
-        // $Weekdayname = "星期六($Weekday)";
         break;
 }
 ?>
@@ -69,23 +57,18 @@ switch ($month) {
     <style>
         * {
             font-family: 'Courier New', Courier, monospace;
-            
+            overflow: hidden;
         }
 
         h1 {
-            /* font-family: Arial, Helvetica, sans-serif; */
             font-size: 50px;
             text-align: center;
             color: brown;
-            /* line-height: 1.4; */
             margin-top: 35;
             margin-bottom: 35;
         }
 
         body {
-            /* background-image: url(/calendar_img/
-             echo $Bg; 
-            ); */
             background-size: cover;
             background-image: url(./calendar_img/background-image-60.jpg);
             background-size: cover;
@@ -104,31 +87,40 @@ switch ($month) {
             margin-top: 0;
         }
 
-        .table {
+        h2 {
+            text-align: center;
+            background-color: #f79400;
+            font-size: 40px;
+        }
+
+        .table {        
             background-color: white;
             width: 600px;
-            padding: 20px;
+            /* padding: 20px; */
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 25px;
+            
         }
 
         .th {
             font-weight: bold;
-            /* font-size: 50px; */
         }
 
         table,
         tr,
         td {
             background-color: white;
+            border-collapse: collapse;
+            
         }
 
         td {
             width: 80px;
             height: 50px;
-            /* border: 1px solid #999; */
-            /* border-collapse: collapse; */
+            border: 1px solid #999;
+
             padding: 5px 5px;
             /* padding 內距 上下5px 左右5px */
             text-align: center;
@@ -193,55 +185,53 @@ switch ($month) {
             margin-bottom: 10px;
         }
 
-        /* 行事曆三人組 */
+        /* 左右按鈕和行事曆組 */
         .table_tri {
-            /* background-color: lightgreen; */
-            /* width: 700px; */
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
             align-items:center;
+            background-color: purple;
         }
-
-        /* 行事曆加上表頭 */
+        
+        /* h2和行事曆 */
         .table_two {
             display: flex;
             flex-direction: column;
+            background-color: yellow;
         }
 
-        /* table表頭 */
-        h2 {
-            text-align: center;
-            margin: 5px;
-            font-size: 40px;
-        }
-
-        /* 按鈕左右框 */
         .bt_left, .bt_right{
-            background-color: #f79400;
+            /* background-color: #f79400; */
             height:50vh;
-            /* width: 30px; */
+            width:auto;
             display: flex;
             align-items: center;
         }
 
 
-        /* 按鈕左右a連結 */
-        .bt_right > a,
-        .bt_left > a {
+        /* 左按鈕 */
+        .bt_left>a {
             font-size: 40px;
             font-weight: bolder;
             color: #C5C6C7;
             text-align: center;
+            margin-left: 10px;
         }
         
-       
-        /* 圖片 */
+        /* 右按鈕 */
+        .bt_right>a {
+            font-size: 40px;
+            font-weight: bolder;
+            color: #C5C6C7;
+            text-align: center;
+            margin-left: 10px;
+        }
+
         .asider {
-            background-color: red;
-            /* align-items: center; */
-            /* padding: 20px; */
-            height: 60vh;
-            box-sizing: border-box;
+            /* background-color: lightseagreen; */
+            align-items: center;
+            padding: 20px;
+            height: 80vh;
         }
 
 
@@ -255,7 +245,7 @@ switch ($month) {
         }
 
         .current-date:hover {
-            color: black; 
+            color: black;
         }
     </style>
 </head>
@@ -354,19 +344,9 @@ switch ($month) {
             <div class="table_two">
                 <h2 class="title">
                     <?php
-                    if (isset($_GET['month']) && isset($_GET['year'])) {
-                        $month = $_GET['month'];
-                        $year = $_GET['year'];
-                        // 使用 mktime 函數根據提供的月份和年份來建立日期
-                        // mktime(h, m, s, month, day, y)
-                        // 從 URL 參數中獲取的月份和年份。
-                        // 這將建立一個時間戳，對應於指定的月份和年份的第一天（日期設置為 1，時間設置為午夜）
-                        $date = mktime(0, 0, 0, $month, 1, $year);
-                        echo date('F Y', $date);
-                    } else {
-                        // 如果未提供 URL 參數，則使用當前日期 
-                        echo date('F Y');
-                    }                
+
+                    echo date("F") . "&nbsp;&nbsp;";
+                    echo date("Y");
                     ?>
                 </h2>
 
@@ -398,10 +378,6 @@ switch ($month) {
                                 // 套用 CSS 類別
                                 $tdClass = "";
                                 if (date('m', $thisCellDate) == date('m', strtotime($thisFirstDay))) {
-                                    if ($month) {
-                                        
-                                    }
-
                                     if ($isWeekend) {
                                         $tdClass .= "weekend";
                                     }
@@ -411,7 +387,6 @@ switch ($month) {
                                 }
 
                                 echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
-                                // $thisCellDate要在當月才出現??
                             }
                             echo "</tr>";
                         }
