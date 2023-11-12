@@ -1,13 +1,6 @@
 <?php
 // 首先檢查 $_GET['month'] 和 $_GET['year'] 是否存在。
 // 只有在這兩個值都存在的情況下，我們才嘗試獲取它們的值
-// if (isset($_GET['month']) && isset($_GET['year'])) {
-//     $month = $_GET['month'];
-//     $year = $_GET['year'];
-//     header("location:calendar2.php?year=$year&month=$month");
-// } else {
-//     header("location:calendar2.php");
-// }
 
 $year = $_GET['year'];
 $month = $_GET['month'];

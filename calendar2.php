@@ -53,213 +53,11 @@ switch ($month) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>線上萬年曆</title>
+    <!-- fontawesome 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        * {
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
-        }
-
-        h1 {
-            font-size: 50px;
-            text-align: center;
-            color: brown;
-            margin-top: 35;
-            margin-bottom: 35;
-        }
-
-        body {
-            background-size: cover;
-            background-image: url(./calendar_img/background-image-60.jpg);
-            background-size: cover;
-        }
-
-        .container {
-            width: 100%;
-            /* background-color: #DFDFDF; */
-            background-color: transparent;
-            height: 85vh;
-            display: flex;
-            flex-wrap: wrap;
-            margin: auto;
-            align-items: center;
-            justify-content: space-evenly;
-            margin-top: 0;
-        }
-
-        /* 行事曆表頭 */
-        h2 {
-            text-align: center;
-            /* background-color: #f79400; */
-            font-size: 38px;
-            color: silver;
-        }
-
-        .table {
-            background-color: white;
-            width: 600px;
-            /* padding: 20px; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 25px;
-        }
-
-        .th {
-            font-weight: bold;
-        }
-
-        table,
-        tr,
-        td {
-            background-color: white;
-            border-collapse: collapse;
-
-        }
-
-        td {
-            width: 80px;
-            height: 50px;
-            border: 1px solid #999;
-
-            padding: 5px 5px;
-            /* padding 內距 上下5px 左右5px */
-            text-align: center;
-            font-size: 20px;
-        }
-
-        td:hover {
-            background-color: lightyellow;
-            color: lightslategray;
-        }
-
-        .nav {
-            display: flex;
-            width: 100%;
-            margin: 0;
-        }
-
-        .form {
-            /* background-color: lightcyan; */
-            width: 40%;
-            height: 5vh;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* text-align: center; */
-        }
-
-        [type="text"] {
-            height: 2.5vh;
-        }
-
-        [type="submit"] {
-            height: 3vh;
-            font-size: 15.5px;
-        }
-
-
-        .home {
-            /* background-color: brown; */
-            text-align: center;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            width: 60%;
-            height: 6vh;
-        }
-
-        .home>a {
-            display: inline-block;
-            text-decoration: none;
-            font-size: 20px;
-            border: 2px #f79400 solid;
-            border-radius: 10px;
-            color: white;
-            background-color: #f79400;
-            text-align: center;
-            margin: auto;
-            padding: 6px;
-        }
-
-
-        a {
-            display: inline;
-            margin-bottom: 10px;
-        }
-
-        /* 左右按鈕和行事曆組 */
-        .table_tri {
-            /* width: 40%; */
-            height: 75vh;
-            margin-bottom: 50px;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            /* background-color: purple; */
-        }
-
-        /* h2和行事曆 */
-        .table_two {
-            display: flex;
-            flex-direction: column;
-            /* background-color: yellow; */
-        }
-
-        .bt_left,
-        .bt_right {
-            /* background-color: #f79400; */
-            height: 50vh;
-            width: auto;
-            display: flex;
-            align-items: center;
-        }
-
-
-        /* 左按鈕 */
-        .bt_left>a {
-            font-size: 40px;
-            font-weight: bolder;
-            color: #C5C6C7;
-            text-align: center;
-            margin-right: 15px;
-        }
-
-        /* 右按鈕 */
-        .bt_right>a {
-            font-size: 40px;
-            font-weight: bolder;
-            color: #C5C6C7;
-            text-align: center;
-            margin-left: 15px;
-        }
-
-
-        /* 右邊圖片區 */
-        .asider {
-            width: 50%;
-            /* background-color: lightseagreen; */
-            text-align: center;
-
-            padding: 20px;
-            height: 80vh;
-        }
-
-
-        .weekend {
-            background: pink;
-        }
-
-        .current-date {
-            font-weight: bolder;
-            font-size: 20px;
-        }
-
-        .current-date:hover {
-            color: black;
-        }
-    </style>
+    <!-- css 連結 -->
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -297,7 +95,7 @@ switch ($month) {
         </div>
 
         <div class="home">
-            <a href="calendar2.php">TODAY</a>
+            <a href="calendar2.php">HOME</a>
         </div>
     </nav>
 
@@ -350,6 +148,7 @@ switch ($month) {
                             <td style='color:red'>SAT</td>
                         </tr>
 
+
                         <?php
                         for ($i = 0; $i < $weeks; $i++) {
                             echo "<tr>";
@@ -357,43 +156,20 @@ switch ($month) {
                                 $addDays = 7 * $i + $j;
                                 $thisCellDate = strtotime("+$addDays days", strtotime($firstCell));
 
-
-                                // 以下檢查是否為當日日期，如果是，添加 CSS 樣式在style中
-                                $todayDate = date("Y-m-d", $thisCellDate) === date("Y-m-d");
-
-                                $isWeekend = date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6;
-
-                                // 套用 CSS 類別
-                                $tdClass = "";
-                                if (date('m', $thisCellDate) == date('m', strtotime($thisFirstDay))) {
-                                    if ($isWeekend) {
-                                        $tdClass .= "weekend";
-                                    }
-                                    if ($todayDate) {
-                                        $tdClass .= " current-date";
-                                    }
+                                if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
+                                    echo "<td style='color:red'>";
+                                } else {
+                                    echo "<td>";
                                 }
 
-                                echo "<td class='$tdClass'>" . date("j", $thisCellDate) . "</td>";
+                                if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
+                                    echo date("j", $thisCellDate);
+                                    // 月份中的日期
+                                }
+                                echo "</td>";
                             }
                             echo "</tr>";
                         }
-
-
-                        //         if (date('w', $thisCellDate) == 0 || date('w', $thisCellDate) == 6) {
-                        //             echo "<td style='color:red'>";
-                        //         } else {
-                        //             echo "<td>";
-                        //         }
-
-                        //         if (date("m", $thisCellDate) == date("m", strtotime($thisFirstDay))) {
-                        //             echo date("j", $thisCellDate);
-                        //             // 月份中的日期
-                        //         }
-                        //         echo "</td>";
-                        //     }
-                        //     echo "</tr>";
-                        // }
                         echo "</table>";
                         ?>
                 </div>
